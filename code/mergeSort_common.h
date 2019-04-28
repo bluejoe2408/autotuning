@@ -65,6 +65,16 @@ extern "C" void mergeSort(
     uint N,
     uint sortDir
 );
+extern "C" void bitonicSort(
+    uint *dstKey,
+    uint *dstVal,
+    uint *bufKey,
+    uint *bufVal,
+    uint *srcKey,
+    uint *srcVal,
+    uint N,
+    uint sortDir
+);
 
 
 
