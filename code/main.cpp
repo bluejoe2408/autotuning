@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
     StopWatchInterface *hTimer = NULL;
 
-    const uint   N = 1024;
+    const uint N = 1024;
     const uint DIR = 1;
     const uint numValues = 2147483646;
 
@@ -36,12 +36,15 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
+    /* pending */
+    int tmpN = 1;
+    while(tmpN < N) tmpN <<= 1;
     printf("Allocating and initializing host arrays...\n\n");
     sdkCreateTimer(&hTimer);
-    h_SrcKey = (uint *)malloc(N * sizeof(uint));
-    h_SrcVal = (uint *)malloc(N * sizeof(uint));
-    h_DstKey = (uint *)malloc(N * sizeof(uint));
-    h_DstVal = (uint *)malloc(N * sizeof(uint));
+    h_SrcKey = (uint *)malloc(tmpN * sizeof(uint));
+    h_SrcVal = (uint *)malloc(tmpN * sizeof(uint));
+    h_DstKey = (uint *)malloc(tmpN * sizeof(uint));
+    h_DstVal = (uint *)malloc(tmpN * sizeof(uint));
 
     srand(2019);
 
@@ -49,6 +52,18 @@ int main(int argc, char **argv)
     {
         h_SrcKey[i] = rand() % numValues;
     }
+
+
+
+    for(uint i = N; i < tmpN; i++ ) h_DstKey[i] = 0;
+
+    N = tmpN;
+
+
+
+
+
+
 
     fillValues(h_SrcVal, N);
 
