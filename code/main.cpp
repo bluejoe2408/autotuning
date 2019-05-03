@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
     StopWatchInterface *hTimer = NULL;
 
-    uint N = 1024;
+    uint N = 1025;
     const uint DIR = 1;
     const uint numValues = 2147483646;
 
