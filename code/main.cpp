@@ -13,19 +13,21 @@
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char **argv)
 {
+    // host variable
     uint *h_SrcKey, *h_SrcVal, *h_DstKey, *h_DstVal;
     uint *hm_SrcKey, *hm_SrcVal, *hm_BufKey, *hm_BufVal, *hm_DstKey, *hm_DstVal;
     uint *hq_SrcKey, *hq_SrcVal, *hq_BufKey, *hq_BufVal, *hq_DstKey, *hq_DstVal;
-
+    // device variable
     uint *d_SrcKey, *d_SrcVal, *d_BufKey, *d_BufVal, *d_DstKey, *d_DstVal;
     uint *db_SrcKey, *db_SrcVal, *db_BufKey, *db_BufVal, *db_DstKey, *db_DstVal;
+    // test var
     uint keysFlag, valuesFlag;
 
     StopWatchInterface *hTimer = NULL;
 
     uint N = 1024;
     const uint DIR = 1;
-    const uint numValues = 2147483646;
+    const uint numValues = 32767;
 
     printf("%s Starting...\n\n", argv[0]);
 
@@ -39,6 +41,7 @@ int main(int argc, char **argv)
     /* pending */
     int tmpN = 1;
     while(tmpN < N) tmpN <<= 1;
+
     printf("Allocating and initializing host arrays...\n\n");
     sdkCreateTimer(&hTimer);
     h_SrcKey = (uint *)malloc(tmpN * sizeof(uint));
@@ -54,16 +57,9 @@ int main(int argc, char **argv)
     }
 
 
-
+    /* pending add 0*/
     for(uint i = N; i < tmpN; i++ ) h_DstKey[i] = 0;
-
     N = tmpN;
-
-
-
-
-
-
 
     fillValues(h_SrcVal, N);
 
