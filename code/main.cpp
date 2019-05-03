@@ -191,7 +191,7 @@ int main(int argc, char **argv)
     printf("Shutting down...\n");
     closeMergeSort();
 
-    printf("Initializing GPU bitonic sort...\n");
+    printf("\nInitializing GPU bitonic sort...\n");
     initMergeSort();
 
     printf("Running GPU bitonic sort...\n");
