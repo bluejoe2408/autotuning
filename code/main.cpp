@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 
     StopWatchInterface *hTimer = NULL;
 
-    uint N = 1025;
+    uint N = 255;
     const uint DIR = 1;
     const uint numValues = 32767;
 
@@ -41,6 +41,7 @@ int main(int argc, char **argv)
     /* pending */
     int tmpN = 1;
     while(tmpN < N) tmpN <<= 1;
+    if (tmpN < 1024) tmpN = 1024;
 
     printf("Allocating and initializing host arrays...\n\n");
     sdkCreateTimer(&hTimer);
@@ -58,7 +59,7 @@ int main(int argc, char **argv)
 
 
     /* pending add 0*/
-    for(uint i = N; i < tmpN; i++ ) h_DstKey[i] = 0;
+    for(uint i = N; i < tmpN; i++ ) h_SrcKey[i] = 0;
     N = tmpN;
 
     fillValues(h_SrcVal, N);
