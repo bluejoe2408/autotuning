@@ -348,7 +348,7 @@ extern "C" void mergeSortHost(
         oval = bufVal;
     }
 
-    printf("Bottom-level sort...\n");
+    //printf("Bottom-level sort...\n");
     memcpy(ikey, srcKey, N * sizeof(uint));
     memcpy(ival, srcVal, N * sizeof(uint));
 
@@ -357,7 +357,7 @@ extern "C" void mergeSortHost(
         bubbleSort(ikey + pos, ival + pos, umin(SHARED_SIZE_LIMIT, N - pos), sortDir);
     }
 
-    printf("Merge...\n");
+    //printf("Merge...\n");
     uint  *ranksA = (uint *)malloc(getSampleCount(N) * sizeof(uint));
     uint  *ranksB = (uint *)malloc(getSampleCount(N) * sizeof(uint));
     uint *limitsA = (uint *)malloc(getSampleCount(N) * sizeof(uint));
