@@ -1,4 +1,4 @@
-#define NUM 255
+#define NUM 100
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
