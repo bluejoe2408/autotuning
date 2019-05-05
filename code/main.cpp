@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     const uint DIR = 1;
     const uint numValues = 32767;
 
-    printf("%s Starting...\n\n", argv[0]);
+    //printf("%s Starting...\n\n", argv[0]);
 
     int dev = findCudaDevice(argc, (const char **) argv);
 
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     while(tmpN < N) tmpN <<= 1;
     if (tmpN < 1024) tmpN = 1024;
 
-    printf("Allocating and initializing host arrays...\n\n");
+    //printf("Allocating and initializing host arrays...\n\n");
     sdkCreateTimer(&hTimer);
     h_SrcKey = (uint *)malloc(tmpN * sizeof(uint));
     h_SrcVal = (uint *)malloc(tmpN * sizeof(uint));
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 
         sdkResetTimer(&hTimer);
         sdkStartTimer(&hTimer);
-        printf("Allocating and initializing host merge sort arrays...\n\n");
+        //printf("Allocating and initializing host merge sort arrays...\n\n");
         hm_SrcKey = (uint *) malloc(N * sizeof(uint));
         hm_SrcVal = (uint *) malloc(N * sizeof(uint));
         hm_BufKey = (uint *) malloc(N * sizeof(uint));
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
         hm_DstVal = (uint *) malloc(N * sizeof(uint));
         memcpy(hm_SrcKey, h_SrcKey, N * sizeof(uint));
         memcpy(hm_SrcVal, h_SrcVal, N * sizeof(uint));
-        printf("Running CPU merge sort...\n");
+        //printf("Running CPU merge sort...\n");
         mergeSortHost(
                 hm_DstKey,
                 hm_DstVal,
@@ -105,8 +105,10 @@ int main(int argc, char **argv)
 #if (NUM < 1024)
         t1 += sdkGetTimerValue(&hTimer);
 #endif
+#if (NUM >= 1024)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
-        printf("Inspecting the results...\n");
+#endif
+        //printf("Inspecting the results...\n");
         keysFlag = validateSortedKeys(
                 hm_DstKey,
                 hm_SrcKey,
@@ -127,7 +129,7 @@ int main(int argc, char **argv)
 
         sdkResetTimer(&hTimer);
         sdkStartTimer(&hTimer);
-        printf("\nAllocating and initializing host quick sort arrays...\n\n");
+        //printf("\nAllocating and initializing host quick sort arrays...\n\n");
         hq_SrcKey = (uint *) malloc(N * sizeof(uint));
         hq_SrcVal = (uint *) malloc(N * sizeof(uint));
         hq_BufKey = (uint *) malloc(N * sizeof(uint));
@@ -137,33 +139,20 @@ int main(int argc, char **argv)
         memcpy(hq_SrcKey, h_SrcKey, N * sizeof(uint));
         memcpy(hq_SrcVal, h_SrcVal, N * sizeof(uint));
 
-        printf("Running CPU quick sort...\n");
+        //printf("Running CPU quick sort...\n");
         std::sort(hq_SrcKey, hq_SrcKey + N);
         sdkStopTimer(&hTimer);
 #if (NUM < 1024)
         t2 += sdkGetTimerValue(&hTimer);
 #endif
+#if (NUM >= 1024)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
-        printf("Inspecting the results...\n");
-        keysFlag = validateSortedKeys(
-                hq_DstKey,
-                hq_SrcKey,
-                1,
-                N,
-                numValues,
-                DIR
-        );
-        valuesFlag = validateSortedValues(
-                hq_DstKey,
-                hq_DstVal,
-                hq_SrcKey,
-                1,
-                N
-        );
+#endif
+
 
         sdkResetTimer(&hTimer);
         sdkStartTimer(&hTimer);
-        printf("\nAllocating and initializing CUDA merge arrays...\n\n");
+        //printf("\nAllocating and initializing CUDA merge arrays...\n\n");
         checkCudaErrors(cudaMalloc((void **) &d_DstKey, N * sizeof(uint)));
         checkCudaErrors(cudaMalloc((void **) &d_DstVal, N * sizeof(uint)));
         checkCudaErrors(cudaMalloc((void **) &d_BufKey, N * sizeof(uint)));
@@ -172,9 +161,9 @@ int main(int argc, char **argv)
         checkCudaErrors(cudaMalloc((void **) &d_SrcVal, N * sizeof(uint)));
         checkCudaErrors(cudaMemcpy(d_SrcKey, h_SrcKey, N * sizeof(uint), cudaMemcpyHostToDevice));
         checkCudaErrors(cudaMemcpy(d_SrcVal, h_SrcVal, N * sizeof(uint), cudaMemcpyHostToDevice));
-        printf("Initializing GPU merge sort...\n");
+        //printf("Initializing GPU merge sort...\n");
         initMergeSort();
-        printf("Running GPU merge sort...\n");
+        //printf("Running GPU merge sort...\n");
         checkCudaErrors(cudaDeviceSynchronize());
         mergeSort(
                 d_DstKey,
@@ -187,15 +176,17 @@ int main(int argc, char **argv)
                 DIR
         );
         checkCudaErrors(cudaDeviceSynchronize());
-        printf("Reading back GPU merge sort results...\n");
+        //printf("Reading back GPU merge sort results...\n");
         checkCudaErrors(cudaMemcpy(h_DstKey, d_DstKey, N * sizeof(uint), cudaMemcpyDeviceToHost));
         checkCudaErrors(cudaMemcpy(h_DstVal, d_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
         sdkStopTimer(&hTimer);
 #if (NUM < 1024)
         t3 += sdkGetTimerValue(&hTimer);
 #endif
+#if (NUM >= 1024)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
-        printf("Inspecting the results...\n");
+#endif
+        //printf("Inspecting the results...\n");
         keysFlag = validateSortedKeys(
                 h_DstKey,
                 h_SrcKey,
@@ -211,13 +202,13 @@ int main(int argc, char **argv)
                 1,
                 N
         );
-        printf("Shutting down...\n");
+        //printf("Shutting down...\n");
         closeMergeSort();
 
 
         sdkResetTimer(&hTimer);
         sdkStartTimer(&hTimer);
-        printf("Allocating and initializing CUDA bitonic arrays...\n\n");
+        //printf("Allocating and initializing CUDA bitonic arrays...\n\n");
         checkCudaErrors(cudaMalloc((void **) &db_DstKey, N * sizeof(uint)));
         checkCudaErrors(cudaMalloc((void **) &db_DstVal, N * sizeof(uint)));
         checkCudaErrors(cudaMalloc((void **) &db_BufKey, N * sizeof(uint)));
@@ -226,9 +217,9 @@ int main(int argc, char **argv)
         checkCudaErrors(cudaMalloc((void **) &db_SrcVal, N * sizeof(uint)));
         checkCudaErrors(cudaMemcpy(db_SrcKey, hb_SrcKey, N * sizeof(uint), cudaMemcpyHostToDevice));
         checkCudaErrors(cudaMemcpy(db_SrcVal, hb_SrcVal, N * sizeof(uint), cudaMemcpyHostToDevice));
-        printf("\nInitializing GPU bitonic sort...\n");
+        //printf("\nInitializing GPU bitonic sort...\n");
         initMergeSort();
-        printf("Running GPU bitonic sort...\n");
+        //printf("Running GPU bitonic sort...\n");
         checkCudaErrors(cudaDeviceSynchronize());
         bitonicSort(
                 db_DstKey,
@@ -241,15 +232,17 @@ int main(int argc, char **argv)
                 DIR
         );
         checkCudaErrors(cudaDeviceSynchronize());
-        printf("Reading back GPU bitonic sort results...\n");
+        //printf("Reading back GPU bitonic sort results...\n");
         checkCudaErrors(cudaMemcpy(h_DstKey, d_DstKey, N * sizeof(uint), cudaMemcpyDeviceToHost));
         checkCudaErrors(cudaMemcpy(h_DstVal, d_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
         sdkStopTimer(&hTimer);
 #if (NUM < 1024)
         t4 += sdkGetTimerValue(&hTimer);
 #endif
+#if (NUM >= 1024)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
-        printf("Inspecting the results...\n");
+#endif
+        //printf("Inspecting the results...\n");
         keysFlag = validateSortedKeys(
                 h_DstKey,
                 h_SrcKey,
@@ -266,7 +259,7 @@ int main(int argc, char **argv)
                 1,
                 N
         );
-        printf("Shutting down...\n");
+        //printf("Shutting down...\n");
         closeMergeSort();
 #if (NUM < 1024)
     }
