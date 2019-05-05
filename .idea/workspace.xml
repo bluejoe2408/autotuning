@@ -9,9 +9,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bbfd3b2-6d01-4b2b-bca2-93054cbb7bb7" name="Default" comment="fix bug">
+    <list default="true" id="0bbfd3b2-6d01-4b2b-bca2-93054cbb7bb7" name="Default" comment="delete output">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/mergeSort_validate.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code/mergeSort_validate.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,11 +24,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="277" column="48" selection-start-line="277" selection-start-column="48" selection-end-line="277" selection-end-column="48" />
+            <state relative-caret-position="3814">
+              <caret line="261" column="10" selection-start-line="261" selection-start-column="10" selection-end-line="261" selection-end-column="10" />
+              <folding>
+                <element signature="e#3354#3405#0" expanded="true" />
+                <element signature="e#4580#4612#0" expanded="true" />
+                <element signature="e#6318#6369#0" expanded="true" />
+                <element signature="e#8505#8556#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,17 +51,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/mergeSort_common.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="120">
               <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/mergeSort_validate.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="57" column="37" lean-forward="true" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
+            <state relative-caret-position="855">
+              <caret line="120" column="6" selection-start-line="120" selection-start-column="6" selection-end-line="120" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -73,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/mergeSort.cu">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2685">
+            <state>
               <caret line="179" column="5" selection-start-line="179" selection-start-column="5" selection-end-line="179" selection-end-column="5" />
             </state>
           </provider>
@@ -106,6 +112,7 @@
         <option value="$PROJECT_DIR$/code/mergeSort.cu" />
         <option value="$PROJECT_DIR$/code/Makefile" />
         <option value="$PROJECT_DIR$/code/main.cpp" />
+        <option value="$PROJECT_DIR$/code/mergeSort_validate.cpp" />
       </list>
     </option>
   </component>
@@ -211,11 +218,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557035244644</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add loop">
+      <created>1557057977131</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1557057977131</updated>
+    </task>
+    <task id="LOCAL-00007" summary="delete output">
+      <created>1557058464021</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1557058464021</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20242000" />
+    <option name="totallyTimeSpent" value="21111000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -247,15 +268,11 @@
     <MESSAGE value="update makefile" />
     <MESSAGE value="add annotation" />
     <MESSAGE value="fix bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
+    <MESSAGE value="add loop" />
+    <MESSAGE value="delete output" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete output" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/code/NsightEclipse.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/readme.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/mergeSort_host.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4155">
@@ -265,7 +282,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/mergeSort.cu">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2685">
+        <state>
           <caret line="179" column="5" selection-start-line="179" selection-start-column="5" selection-end-line="179" selection-end-column="5" />
         </state>
       </provider>
@@ -284,24 +301,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3814">
+          <caret line="261" column="10" selection-start-line="261" selection-start-column="10" selection-end-line="261" selection-end-column="10" />
+          <folding>
+            <element signature="e#3354#3405#0" expanded="true" />
+            <element signature="e#4580#4612#0" expanded="true" />
+            <element signature="e#6318#6369#0" expanded="true" />
+            <element signature="e#8505#8556#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/mergeSort_common.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="120">
           <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/NsightEclipse.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/readme.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/mergeSort_validate.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="57" column="37" lean-forward="true" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="277" column="48" selection-start-line="277" selection-start-column="48" selection-end-line="277" selection-end-column="48" />
+        <state relative-caret-position="855">
+          <caret line="120" column="6" selection-start-line="120" selection-start-column="6" selection-end-line="120" selection-end-column="6" />
         </state>
       </provider>
     </entry>

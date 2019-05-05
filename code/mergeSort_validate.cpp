@@ -35,11 +35,11 @@ extern "C" uint validateSortedKeys(
 
     if (arrayLength < 2)
     {
-        printf("validateSortedKeys(): arrays too short, exiting...\n");
+        //printf("validateSortedKeys(): arrays too short, exiting...\n");
         return 1;
     }
 
-    printf("...inspecting keys array: ");
+    //printf("...inspecting keys array: ");
     srcHist = (uint *)malloc(numValues * sizeof(uint));
     resHist = (uint *)malloc(numValues * sizeof(uint));
 
@@ -60,7 +60,7 @@ extern "C" uint validateSortedKeys(
             }
             else
             {
-                fprintf(stderr, "***Set %u source/result key arrays are not limited properly***\n", j);
+                //fprintf(stderr, "***Set %u source/result key arrays are not limited properly***\n", j);
                 flag = 0;
                 goto brk;
             }
@@ -70,7 +70,7 @@ extern "C" uint validateSortedKeys(
         for (uint i = 0; i < numValues; i++)
             if (srcHist[i] != resHist[i])
             {
-                fprintf(stderr, "***Set %u source/result keys histograms do not match***\n", j);
+                //fprintf(stderr, "***Set %u source/result keys histograms do not match***\n", j);
                 flag = 0;
                 goto brk;
             }
@@ -79,7 +79,7 @@ extern "C" uint validateSortedKeys(
         for (uint i = 0; i < arrayLength - 1; i++)
             if ((sortDir && (resKey[i] > resKey[i + 1])) || (!sortDir && (resKey[i] < resKey[i + 1])))
             {
-                fprintf(stderr, "***Set %u result key array is not ordered properly***\n", j);
+                //fprintf(stderr, "***Set %u result key array is not ordered properly***\n", j);
                 flag = 0;
                 goto brk;
             }
@@ -89,7 +89,7 @@ brk:
     free(resHist);
     free(srcHist);
 
-    if (flag) printf("OK\n");
+    if (flag) //printf("OK\n");
 
     return flag;
 }
@@ -118,7 +118,7 @@ extern "C" int validateSortedValues(
 {
     int correctFlag = 1, stableFlag = 1;
 
-    printf("...inspecting keys and values array: ");
+    //printf("...inspecting keys and values array: ");
 
     for (uint i = 0; i < batchSize; i++, resKey += arrayLength, resVal += arrayLength)
     {
@@ -132,8 +132,8 @@ extern "C" int validateSortedValues(
         }
     }
 
-    printf(correctFlag ? "OK\n" : "***corrupted!!!***\n");
-    printf(stableFlag ? "...stability property: stable!\n" : "...stability property: NOT stable\n");
+    //printf(correctFlag ? "OK\n" : "***corrupted!!!***\n");
+    //printf(stableFlag ? "...stability property: stable!\n" : "...stability property: NOT stable\n");
 
     return correctFlag;
 }
