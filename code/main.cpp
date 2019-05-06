@@ -233,8 +233,8 @@ int main(int argc, char **argv)
         );
         checkCudaErrors(cudaDeviceSynchronize());
         //printf("Reading back GPU bitonic sort results...\n");
-        checkCudaErrors(cudaMemcpy(h_DstKey, d_DstKey, N * sizeof(uint), cudaMemcpyDeviceToHost));
-        checkCudaErrors(cudaMemcpy(h_DstVal, d_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(h_DstKey, db_DstKey, N * sizeof(uint), cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(h_DstVal, db_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
         sdkStopTimer(&hTimer);
 #if (NUM < 1024)
         t4 += sdkGetTimerValue(&hTimer);
