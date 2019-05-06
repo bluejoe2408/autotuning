@@ -88,8 +88,8 @@ int main(int argc, char **argv)
         hm_BufVal = (uint *) malloc(NUM * sizeof(uint));
         hm_DstKey = (uint *) malloc(NUM * sizeof(uint));
         hm_DstVal = (uint *) malloc(NUM * sizeof(uint));
-        memcpy(hm_SrcKey, h_SrcKey, N * sizeof(uint));
-        memcpy(hm_SrcVal, h_SrcVal, N * sizeof(uint));
+        memcpy(hm_SrcKey, h_SrcKey, NUM * sizeof(uint));
+        memcpy(hm_SrcVal, h_SrcVal, NUM * sizeof(uint));
         //printf("Running CPU merge sort...\n");
         mergeSortHost(
                 hm_DstKey,
@@ -130,14 +130,14 @@ int main(int argc, char **argv)
         sdkResetTimer(&hTimer);
         sdkStartTimer(&hTimer);
         //printf("\nAllocating and initializing host quick sort arrays...\n\n");
-        hq_SrcKey = (uint *) malloc(N * sizeof(uint));
-        hq_SrcVal = (uint *) malloc(N * sizeof(uint));
-        hq_BufKey = (uint *) malloc(N * sizeof(uint));
-        hq_BufVal = (uint *) malloc(N * sizeof(uint));
-        hq_DstKey = (uint *) malloc(N * sizeof(uint));
-        hq_DstVal = (uint *) malloc(N * sizeof(uint));
-        memcpy(hq_SrcKey, h_SrcKey, N * sizeof(uint));
-        memcpy(hq_SrcVal, h_SrcVal, N * sizeof(uint));
+        hq_SrcKey = (uint *) malloc(NUM * sizeof(uint));
+        hq_SrcVal = (uint *) malloc(NUM * sizeof(uint));
+        hq_BufKey = (uint *) malloc(NUM * sizeof(uint));
+        hq_BufVal = (uint *) malloc(NUM * sizeof(uint));
+        hq_DstKey = (uint *) malloc(NUM * sizeof(uint));
+        hq_DstVal = (uint *) malloc(NUM * sizeof(uint));
+        memcpy(hq_SrcKey, h_SrcKey, NUM * sizeof(uint));
+        memcpy(hq_SrcVal, h_SrcVal, NUM * sizeof(uint));
 
         //printf("Running CPU quick sort...\n");
         std::sort(hq_SrcKey, hq_SrcKey + N);
