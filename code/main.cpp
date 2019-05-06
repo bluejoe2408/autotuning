@@ -1,4 +1,5 @@
 #define NUM 1024
+#define TH 1024
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,7 +26,7 @@ int main(int argc, char **argv)
     uint keysFlag, valuesFlag;
 
     StopWatchInterface *hTimer = NULL;
-#if (NUM < 1024)
+#if (NUM < TH)
     float t1 = 0, t2 = 0, t3 = 0, t4 = 0;
 #endif
 
@@ -60,7 +61,7 @@ int main(int argc, char **argv)
 
     srand(2019);
 
-#if (NUM < 1024)
+#if (NUM < TH)
     for(uint loop = 0; loop < 1000; loop++) {
 #endif
         for (uint i = 0; i < N; i++) {
@@ -102,10 +103,10 @@ int main(int argc, char **argv)
                 DIR
         );
         sdkStopTimer(&hTimer);
-#if (NUM < 1024)
+#if (NUM < TH)
         t1 += sdkGetTimerValue(&hTimer);
 #endif
-#if (NUM >= 1024)
+#if (NUM >= TH)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
 #endif
         //printf("Inspecting the results...\n");
@@ -142,10 +143,10 @@ int main(int argc, char **argv)
         //printf("Running CPU quick sort...\n");
         std::sort(hq_SrcKey, hq_SrcKey + NUM);
         sdkStopTimer(&hTimer);
-#if (NUM < 1024)
+#if (NUM < TH)
         t2 += sdkGetTimerValue(&hTimer);
 #endif
-#if (NUM >= 1024)
+#if (NUM >= TH)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
 #endif
 
@@ -179,10 +180,10 @@ int main(int argc, char **argv)
         checkCudaErrors(cudaMemcpy(h_DstKey, db_DstKey, N * sizeof(uint), cudaMemcpyDeviceToHost));
         checkCudaErrors(cudaMemcpy(h_DstVal, db_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
         sdkStopTimer(&hTimer);
-        #if (NUM < 1024)
+        #if (NUM < TH)
         t4 += sdkGetTimerValue(&hTimer);
         #endif
-        #if (NUM >= 1024)
+        #if (NUM >= TH)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
         #endif
         //printf("Inspecting the results...\n");
@@ -235,10 +236,10 @@ int main(int argc, char **argv)
         checkCudaErrors(cudaMemcpy(h_DstKey, d_DstKey, N * sizeof(uint), cudaMemcpyDeviceToHost));
         checkCudaErrors(cudaMemcpy(h_DstVal, d_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
         sdkStopTimer(&hTimer);
-#if (NUM < 1024)
+#if (NUM < TH)
         t3 += sdkGetTimerValue(&hTimer);
 #endif
-#if (NUM >= 1024)
+#if (NUM >= TH)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
 #endif
         //printf("Inspecting the results...\n");
@@ -262,10 +263,10 @@ int main(int argc, char **argv)
 
 
 
-#if (NUM < 1024)
+#if (NUM < TH)
     }
 #endif
-#if (NUM < 1024)
+#if (NUM < TH)
     printf("Time of merge host: %f ms\n", t1/1000);
     printf("Time of quick host: %f ms\n", t2/1000);
     printf("Time of merge device: %f ms\n", t3/1000);
