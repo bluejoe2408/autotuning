@@ -98,7 +98,7 @@ int main(int argc, char **argv)
                 hm_BufVal,
                 hm_SrcKey,
                 hm_SrcVal,
-                N,
+                NUM,
                 DIR
         );
         sdkStopTimer(&hTimer);
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
                 hm_DstKey,
                 hm_SrcKey,
                 1,
-                N,
+                NUM,
                 numValues,
                 DIR
         );
@@ -123,7 +123,7 @@ int main(int argc, char **argv)
                 hm_DstVal,
                 hm_SrcKey,
                 1,
-                N
+                NUM
         );
 
 
