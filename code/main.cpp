@@ -82,14 +82,14 @@ int main(int argc, char **argv)
         sdkResetTimer(&hTimer);
         sdkStartTimer(&hTimer);
         //printf("Allocating and initializing host merge sort arrays...\n\n");
-        hm_SrcKey = (uint *) malloc(NUM * sizeof(uint));
-        hm_SrcVal = (uint *) malloc(NUM * sizeof(uint));
-        hm_BufKey = (uint *) malloc(NUM * sizeof(uint));
-        hm_BufVal = (uint *) malloc(NUM * sizeof(uint));
-        hm_DstKey = (uint *) malloc(NUM * sizeof(uint));
-        hm_DstVal = (uint *) malloc(NUM * sizeof(uint));
-        memcpy(hm_SrcKey, h_SrcKey, NUM * sizeof(uint));
-        memcpy(hm_SrcVal, h_SrcVal, NUM * sizeof(uint));
+        hm_SrcKey = (uint *) malloc(N * sizeof(uint));
+        hm_SrcVal = (uint *) malloc(N * sizeof(uint));
+        hm_BufKey = (uint *) malloc(N * sizeof(uint));
+        hm_BufVal = (uint *) malloc(N * sizeof(uint));
+        hm_DstKey = (uint *) malloc(N * sizeof(uint));
+        hm_DstVal = (uint *) malloc(N * sizeof(uint));
+        memcpy(hm_SrcKey, h_SrcKey, N * sizeof(uint));
+        memcpy(hm_SrcVal, h_SrcVal, N * sizeof(uint));
         //printf("Running CPU merge sort...\n");
         mergeSortHost(
                 hm_DstKey,
