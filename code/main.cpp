@@ -1,4 +1,4 @@
-#define NUM 1024000
+#define NUM 1024
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>

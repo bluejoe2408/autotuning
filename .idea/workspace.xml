@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0bbfd3b2-6d01-4b2b-bca2-93054cbb7bb7" name="Default" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/code/main.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,17 +26,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="164" column="24" lean-forward="true" selection-start-line="164" selection-start-column="24" selection-end-line="164" selection-end-column="24" />
+            <state relative-caret-position="2190">
+              <caret line="186" column="9" selection-start-line="186" selection-start-column="9" selection-end-line="186" selection-end-column="9" />
               <folding>
-                <element signature="e#1000#1037#0" expanded="true" />
-                <element signature="e#1945#1986#0" expanded="true" />
-                <element signature="e#3299#3331#0" expanded="true" />
-                <element signature="e#4595#4627#0" expanded="true" />
-                <element signature="e#6285#6317#0" expanded="true" />
-                <element signature="e#8472#8504#0" expanded="true" />
-                <element signature="e#9092#9093#0" expanded="true" />
-                <element signature="e#9120#9329#0" expanded="true" />
+                <element signature="e#1003#1040#0" expanded="true" />
+                <element signature="e#1948#1989#0" expanded="true" />
+                <element signature="e#3302#3334#0" expanded="true" />
+                <element signature="e#4598#4630#0" expanded="true" />
+                <element signature="e#6323#6355#0" expanded="true" />
+                <element signature="e#6288#6320#0" expanded="true" />
+                <element signature="e#9132#9133#0" expanded="true" />
+                <element signature="e#9125#9334#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -188,7 +188,7 @@
       <workItem from="1556206979911" duration="5256000" />
       <workItem from="1556255260605" duration="542000" />
       <workItem from="1556802636808" duration="3250000" />
-      <workItem from="1557115600919" duration="2305000" />
+      <workItem from="1557115600919" duration="2775000" />
     </task>
     <task id="LOCAL-00001" summary="add pending.">
       <created>1556803372714</created>
@@ -295,11 +295,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557122575487</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="update">
+      <created>1557122984485</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1557122984485</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26069000" />
+    <option name="totallyTimeSpent" value="26539000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -389,17 +396,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="164" column="24" lean-forward="true" selection-start-line="164" selection-start-column="24" selection-end-line="164" selection-end-column="24" />
+        <state relative-caret-position="2190">
+          <caret line="186" column="9" selection-start-line="186" selection-start-column="9" selection-end-line="186" selection-end-column="9" />
           <folding>
-            <element signature="e#1000#1037#0" expanded="true" />
-            <element signature="e#1945#1986#0" expanded="true" />
-            <element signature="e#3299#3331#0" expanded="true" />
-            <element signature="e#4595#4627#0" expanded="true" />
-            <element signature="e#6285#6317#0" expanded="true" />
-            <element signature="e#8472#8504#0" expanded="true" />
-            <element signature="e#9092#9093#0" expanded="true" />
-            <element signature="e#9120#9329#0" expanded="true" />
+            <element signature="e#1003#1040#0" expanded="true" />
+            <element signature="e#1948#1989#0" expanded="true" />
+            <element signature="e#3302#3334#0" expanded="true" />
+            <element signature="e#4598#4630#0" expanded="true" />
+            <element signature="e#6323#6355#0" expanded="true" />
+            <element signature="e#6288#6320#0" expanded="true" />
+            <element signature="e#9132#9133#0" expanded="true" />
+            <element signature="e#9125#9334#0" expanded="true" />
           </folding>
         </state>
       </provider>
