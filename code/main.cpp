@@ -1,5 +1,5 @@
-#define NUM 1024
-#define TH 1024
+#define NUM 10
+#define TH 1
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
