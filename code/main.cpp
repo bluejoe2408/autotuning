@@ -50,11 +50,11 @@ int main(int argc, char **argv)
         fprintf(fpp,"x1 = 1:10;");
         fprintf(fpp,"x2 = 1:10;");
         fprintf(fpp,"x3 = 1:9;");
-        fprintf(fpp,"x4 = 1:10;");
+        fprintf(fpp,"x4 = 1:10;\n");
         fprintf(fppp,"x1 = 1:10;");
         fprintf(fppp,"x2 = 1:10;");
         fprintf(fppp,"x3 = 1:9;");
-        fprintf(fppp,"x4 = 1:10;");
+        fprintf(fppp,"x4 = 1:10;\n");
         StopWatchInterface *hTimer = NULL;
         float t1 = 0, t2 = 0, t3 = 0, t4 = 0;
 
@@ -249,8 +249,8 @@ int main(int argc, char **argv)
             checkCudaErrors(cudaMemcpy(h_DstVal, db_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
             sdkStopTimer(&hTimer);
             t4 += sdkGetTimerValue(&hTimer);
-            fprintf(fpp,"x4(%d) = %f; ",loop+1, sdkGetTimerValue(&hTimer));
-            fprintf(fppp,"x4(%d) = %f; ",loop+1, sdkGetTimerValue(&hTimer));
+            fprintf(fpp,"x4(%d) = %f; \n",loop+1, sdkGetTimerValue(&hTimer));
+            fprintf(fppp,"x4(%d) = %f; \n",loop+1, sdkGetTimerValue(&hTimer));
             //printf("Inspecting the results...\n");
             keysFlag = validateSortedKeys(
                     h_DstKey,
@@ -271,8 +271,8 @@ int main(int argc, char **argv)
             //printf("Shutting down...\n");
             closeMergeSort();
 
-            fprintf(fpp,"fprintf(fid,'1 %f %f %f %f\\n',var(x1),var(x2),var(x3),var(x4));\n");
-            fprintf(fppp,"fprintf(fid,'1 %f %f %f %f\\n',std(x1),std(x2),std(x3),std(x4));\n");
+            fprintf(fpp,"fprintf(fid,'1 %%f %%f %%f %%f\\n',var(x1),var(x2),var(x3),var(x4));\n");
+            fprintf(fppp,"fprintf(fid,'1 %%f %%f %%f %%f\\n',std(x1),std(x2),std(x3),std(x4));\n");
 
         }
         fprintf(fp,"y1(%d) = %f; ",1+NUM/100, t1/10);
