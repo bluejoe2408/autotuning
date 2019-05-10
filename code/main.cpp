@@ -1,4 +1,4 @@
-#define ROUND 100001
+#define ROUND 21501
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,6 +27,11 @@ int main(int argc, char **argv)
     uint R1;
     FILE *fp = NULL;
     fp = fopen("grapro.m", "w");
+    fprintf("x=1:100:%d;",ROUND);
+    fprintf("y1=1:100:%d;",ROUND);
+    fprintf("y2=1:100:%d;",ROUND);
+    fprintf("y3=1:100:%d;",ROUND);
+    fprintf("y4=1:100:%d;\n",ROUND);
 
     //printf("%s Starting...\n\n", argv[0]);
 
@@ -251,6 +256,7 @@ int main(int argc, char **argv)
         fprintf(fp,"y2(%d) = %f; ",NUM, t2/100);
         fprintf(fp,"y3(%d) = %f; ",NUM, (t3 - R1) / 99);
         fprintf(fp,"y4(%d) = %f;\n",NUM, t4 / 100);
+        fprintf(fp,"plot(x,y1,x,y2,x,y3,x,y4);");
         //finally release the space
         sdkDeleteTimer(&hTimer);
         checkCudaErrors(cudaFree(d_SrcVal));
