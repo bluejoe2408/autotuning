@@ -7,6 +7,7 @@
 #include <helper_cuda.h>
 #include <algorithm>
 #include "mergeSort_common.h"
+#include <iostream>
 #include <fstream>
 using namespace std;
 
