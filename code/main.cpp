@@ -271,14 +271,15 @@ int main(int argc, char **argv)
             //printf("Shutting down...\n");
             closeMergeSort();
 
-            fprintf(fpp,"fprintf(fid,'1 %%f %%f %%f %%f\\n',var(x1),var(x2),var(x3),var(x4));\n");
-            fprintf(fppp,"fprintf(fid,'1 %%f %%f %%f %%f\\n',std(x1),std(x2),std(x3),std(x4));\n");
+
 
         }
         fprintf(fp,"y1(%d) = %f; ",1+NUM/100, t1/10);
         fprintf(fp,"y2(%d) = %f; ",1+NUM/100, t2/10);
         fprintf(fp,"y3(%d) = %f; ",1+NUM/100, (t3 - R1) / 9);
         fprintf(fp,"y4(%d) = %f;\n",1+NUM/100, t4 / 10);
+        fprintf(fpp,"fprintf(fid,'1 %%f %%f %%f %%f\\n',var(x1),var(x2),var(x3),var(x4));\n");
+        fprintf(fppp,"fprintf(fid,'1 %%f %%f %%f %%f\\n',std(x1),std(x2),std(x3),std(x4));\n");
 
         //finally release the space
         sdkDeleteTimer(&hTimer);
