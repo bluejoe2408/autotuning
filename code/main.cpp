@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     uint keysFlag, valuesFlag;
     // remove the first gpu call
     uint R1;
-    ofstream matlabout("grapro.m");
+    std::ofstream matlabout("grapro.m");
 
     for(uint NUM = 1; NUM <= ROUND; NUM++) {
 
