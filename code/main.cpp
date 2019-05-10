@@ -1,4 +1,4 @@
-#define ROUND 10000
+#define ROUND 1000
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
