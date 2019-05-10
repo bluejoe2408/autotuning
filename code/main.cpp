@@ -272,6 +272,6 @@ int main(int argc, char **argv)
         free(hb_SrcVal);
         free(hb_SrcKey);
 
-        exit((keysFlag && valuesFlag) ? EXIT_SUCCESS : EXIT_FAILURE);
+        //exit((keysFlag && valuesFlag) ? EXIT_SUCCESS : EXIT_FAILURE);
     }
 }
