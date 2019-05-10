@@ -7,9 +7,6 @@
 #include <helper_cuda.h>
 #include <algorithm>
 #include "mergeSort_common.h"
-#include <iostream>
-#include <fstream>
-using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Test driver
@@ -28,8 +25,8 @@ int main(int argc, char **argv)
     uint keysFlag, valuesFlag;
     // remove the first gpu call
     uint R1;
-    ofstream matlabout("grapro.m");
-    matlabout<<"dddddddd";
+    FILE *fp = NULL;
+    fp = fopen("grapro.m", "w");
 
     for(uint NUM = 1; NUM <= ROUND; NUM++) {
 
@@ -248,12 +245,10 @@ int main(int argc, char **argv)
 
 
         }
-        matlabout << "y=[";
-        matlabout << t1 / 1000 << ",\n";
-        matlabout << t2 / 1000 << ",\n";
-        matlabout << (t3 - R1) / 999 << ",\n";
-        if (NUM!=ROUND) matlabout << t4 / 1000 << ",\n";
-        else matlabout << t4 / 1000 << "];";
+        fprintf(fp,"y1(%d) = %f; ",NUM, t1/1000);
+        fprintf(fp,"y2(%d) = %f; ",NUM, t2/1000);
+        fprintf(fp,"y3(%d) = %f; ",NUM, (t3 - R1) / 999);
+        fprintf(fp,"y4(%d) = %f;\n",NUM, t4 / 1000);
         //finally release the space
         sdkDeleteTimer(&hTimer);
         checkCudaErrors(cudaFree(d_SrcVal));
@@ -279,5 +274,4 @@ int main(int argc, char **argv)
 
         exit((keysFlag && valuesFlag) ? EXIT_SUCCESS : EXIT_FAILURE);
     }
-    matlabout.close();
 }
