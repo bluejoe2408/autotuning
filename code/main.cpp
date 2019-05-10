@@ -28,6 +28,14 @@ int main(int argc, char **argv)
     FILE *fp = NULL;
     fp = fopen("grapro.m", "w");
 
+    //printf("%s Starting...\n\n", argv[0]);
+
+    int dev = findCudaDevice(argc, (const char **) argv);
+
+    if (dev == -1) {
+        return EXIT_FAILURE;
+    }
+    
     for(uint NUM = 1; NUM <= ROUND; NUM++) {
 
         StopWatchInterface *hTimer = NULL;
@@ -37,13 +45,7 @@ int main(int argc, char **argv)
         const uint DIR = 1;
         const uint numValues = 32767;
 
-        //printf("%s Starting...\n\n", argv[0]);
 
-        int dev = findCudaDevice(argc, (const char **) argv);
-
-        if (dev == -1) {
-            return EXIT_FAILURE;
-        }
 
         /* pending */
         int tmpN = 1;
