@@ -1,27 +1,3 @@
-/*
- * Copyright 1993-2015 NVIDIA Corporation.  All rights reserved.
- *
- * Please refer to the NVIDIA end user license agreement (EULA) associated
- * with this source code for terms and conditions that govern your use of
- * this software. Any use, reproduction, disclosure, or distribution of
- * this software and related documentation outside the terms of the EULA
- * is strictly prohibited.
- *
- */
-
-
-
-
-/*
- * Based on "Designing efficient sorting algorithms for manycore GPUs"
- * by Nadathur Satish, Mark Harris, and Michael Garland
- * http://mgarland.org/files/papers/gpusort-ipdps09.pdf
- *
- * Victor Podlozhnyuk 09/24/2009
- */
-
-
-
 #include <assert.h>
 #include <helper_cuda.h>
 #include "mergeSort_common.h"
