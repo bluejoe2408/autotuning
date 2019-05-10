@@ -27,11 +27,11 @@ int main(int argc, char **argv)
     uint R1;
     FILE *fp = NULL;
     fp = fopen("grapro.m", "w");
-    fprintf("x=1:100:%d;",ROUND);
-    fprintf("y1=1:100:%d;",ROUND);
-    fprintf("y2=1:100:%d;",ROUND);
-    fprintf("y3=1:100:%d;",ROUND);
-    fprintf("y4=1:100:%d;\n",ROUND);
+    fprintf(fp,"x=1:100:%d;",ROUND);
+    fprintf(fp,"y1=1:100:%d;",ROUND);
+    fprintf(fp,"y2=1:100:%d;",ROUND);
+    fprintf(fp,"y3=1:100:%d;",ROUND);
+    fprintf(fp,"y4=1:100:%d;\n",ROUND);
 
     //printf("%s Starting...\n\n", argv[0]);
 
