@@ -29,6 +29,7 @@ int main(int argc, char **argv)
     // remove the first gpu call
     uint R1;
     ofstream matlabout("grapro.m");
+    matlabout<<"dddddddd";
 
     for(uint NUM = 1; NUM <= ROUND; NUM++) {
 
