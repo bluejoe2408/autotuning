@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "mergeSort_common.h"
 #include <fstream>
+using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Test driver
@@ -26,7 +27,7 @@ int main(int argc, char **argv)
     uint keysFlag, valuesFlag;
     // remove the first gpu call
     uint R1;
-    std::ofstream matlabout("grapro.m");
+    ofstream matlabout("grapro.m");
 
     for(uint NUM = 1; NUM <= ROUND; NUM++) {
 
@@ -276,4 +277,5 @@ int main(int argc, char **argv)
 
         exit((keysFlag && valuesFlag) ? EXIT_SUCCESS : EXIT_FAILURE);
     }
+    matlabout.close();
 }
