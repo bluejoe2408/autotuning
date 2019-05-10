@@ -1,5 +1,5 @@
 #define NUM 10000
-#define TH 1
+#define TH 10000000
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
