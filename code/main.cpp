@@ -184,8 +184,8 @@ int main(int argc, char **argv)
         sdkStopTimer(&hTimer);
     #if (NUM < TH)
         t3 += sdkGetTimerValue(&hTimer);
+        if (loop ==0) R1 = sdkGetTimerValue(&hTimer);
     #endif
-        if (loop ==1) R1 = sdkGetTimerValue(&hTimer);
     #if (NUM >= TH)
         printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
     #endif
