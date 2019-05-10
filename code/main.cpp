@@ -1,5 +1,5 @@
-#define NUM 10
-#define TH 1
+#define NUM 10000
+#define TH 1000000
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +24,8 @@ int main(int argc, char **argv)
     uint *db_SrcKey, *db_SrcVal, *db_BufKey, *db_BufVal, *db_DstKey, *db_DstVal;
     // test var
     uint keysFlag, valuesFlag;
+    // remove the first gpu call
+    uint R1;
 
     StopWatchInterface *hTimer = NULL;
 #if (NUM < TH)
@@ -152,6 +154,62 @@ int main(int argc, char **argv)
 
         sdkResetTimer(&hTimer);
         sdkStartTimer(&hTimer);
+        //printf("\nAllocating and initializing CUDA merge arrays...\n\n");
+        checkCudaErrors(cudaMalloc((void **) &d_DstKey, N * sizeof(uint)));
+        checkCudaErrors(cudaMalloc((void **) &d_DstVal, N * sizeof(uint)));
+        checkCudaErrors(cudaMalloc((void **) &d_BufKey, N * sizeof(uint)));
+        checkCudaErrors(cudaMalloc((void **) &d_BufVal, N * sizeof(uint)));
+        checkCudaErrors(cudaMalloc((void **) &d_SrcKey, N * sizeof(uint)));
+        checkCudaErrors(cudaMalloc((void **) &d_SrcVal, N * sizeof(uint)));
+        checkCudaErrors(cudaMemcpy(d_SrcKey, h_SrcKey, N * sizeof(uint), cudaMemcpyHostToDevice));
+        checkCudaErrors(cudaMemcpy(d_SrcVal, h_SrcVal, N * sizeof(uint), cudaMemcpyHostToDevice));
+        //printf("Initializing GPU merge sort...\n");
+        initMergeSort();
+        //printf("Running GPU merge sort...\n");
+        checkCudaErrors(cudaDeviceSynchronize());
+        mergeSort(
+                d_DstKey,
+                d_DstVal,
+                d_BufKey,
+                d_BufVal,
+                d_SrcKey,
+                d_SrcVal,
+                N,
+                DIR
+        );
+        checkCudaErrors(cudaDeviceSynchronize());
+        //printf("Reading back GPU merge sort results...\n");
+        checkCudaErrors(cudaMemcpy(h_DstKey, d_DstKey, N * sizeof(uint), cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(h_DstVal, d_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
+        sdkStopTimer(&hTimer);
+    #if (NUM < TH)
+        t3 += sdkGetTimerValue(&hTimer);
+    #endif
+        R1 = sdkGetTimerValue(&hTimer);
+    #if (NUM >= TH)
+        printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
+    #endif
+        //printf("Inspecting the results...\n");
+        keysFlag = validateSortedKeys(
+                h_DstKey,
+                h_SrcKey,
+                1,
+                N,
+                numValues,
+                DIR
+        );
+        valuesFlag = validateSortedValues(
+                h_DstKey,
+                h_DstVal,
+                h_SrcKey,
+                1,
+                N
+        );
+        //printf("Shutting down...\n");
+        closeMergeSort();
+
+        sdkResetTimer(&hTimer);
+        sdkStartTimer(&hTimer);
         //printf("Allocating and initializing CUDA bitonic arrays...\n\n");
         checkCudaErrors(cudaMalloc((void **) &db_DstKey, N * sizeof(uint)));
         checkCudaErrors(cudaMalloc((void **) &db_DstVal, N * sizeof(uint)));
@@ -206,60 +264,7 @@ int main(int argc, char **argv)
         //printf("Shutting down...\n");
         closeMergeSort();
 
-        sdkResetTimer(&hTimer);
-        sdkStartTimer(&hTimer);
-        //printf("\nAllocating and initializing CUDA merge arrays...\n\n");
-        checkCudaErrors(cudaMalloc((void **) &d_DstKey, N * sizeof(uint)));
-        checkCudaErrors(cudaMalloc((void **) &d_DstVal, N * sizeof(uint)));
-        checkCudaErrors(cudaMalloc((void **) &d_BufKey, N * sizeof(uint)));
-        checkCudaErrors(cudaMalloc((void **) &d_BufVal, N * sizeof(uint)));
-        checkCudaErrors(cudaMalloc((void **) &d_SrcKey, N * sizeof(uint)));
-        checkCudaErrors(cudaMalloc((void **) &d_SrcVal, N * sizeof(uint)));
-        checkCudaErrors(cudaMemcpy(d_SrcKey, h_SrcKey, N * sizeof(uint), cudaMemcpyHostToDevice));
-        checkCudaErrors(cudaMemcpy(d_SrcVal, h_SrcVal, N * sizeof(uint), cudaMemcpyHostToDevice));
-        //printf("Initializing GPU merge sort...\n");
-        initMergeSort();
-        //printf("Running GPU merge sort...\n");
-        checkCudaErrors(cudaDeviceSynchronize());
-        mergeSort(
-                d_DstKey,
-                d_DstVal,
-                d_BufKey,
-                d_BufVal,
-                d_SrcKey,
-                d_SrcVal,
-                N,
-                DIR
-        );
-        checkCudaErrors(cudaDeviceSynchronize());
-        //printf("Reading back GPU merge sort results...\n");
-        checkCudaErrors(cudaMemcpy(h_DstKey, d_DstKey, N * sizeof(uint), cudaMemcpyDeviceToHost));
-        checkCudaErrors(cudaMemcpy(h_DstVal, d_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
-        sdkStopTimer(&hTimer);
-#if (NUM < TH)
-        t3 += sdkGetTimerValue(&hTimer);
-#endif
-#if (NUM >= TH)
-        printf("Time: %f ms\n", sdkGetTimerValue(&hTimer));
-#endif
-        //printf("Inspecting the results...\n");
-        keysFlag = validateSortedKeys(
-                h_DstKey,
-                h_SrcKey,
-                1,
-                N,
-                numValues,
-                DIR
-        );
-        valuesFlag = validateSortedValues(
-                h_DstKey,
-                h_DstVal,
-                h_SrcKey,
-                1,
-                N
-        );
-        //printf("Shutting down...\n");
-        closeMergeSort();
+
 
 
 
@@ -269,7 +274,7 @@ int main(int argc, char **argv)
 #if (NUM < TH)
     printf("Time of merge host: %f ms\n", t1/1000);
     printf("Time of quick host: %f ms\n", t2/1000);
-    printf("Time of merge device: %f ms\n", t3/1000);
+    printf("Time of merge device: %f ms\n", (t3-R1)/999);
     printf("Time of bitonic device: %f ms\n", t4/1000);
 #endif
     //finally release the space
