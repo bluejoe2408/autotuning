@@ -247,10 +247,10 @@ int main(int argc, char **argv)
 
 
         }
-        fprintf(fp,"y1(%d) = %f; ",NUM, t1/1000);
-        fprintf(fp,"y2(%d) = %f; ",NUM, t2/1000);
-        fprintf(fp,"y3(%d) = %f; ",NUM, (t3 - R1) / 999);
-        fprintf(fp,"y4(%d) = %f;\n",NUM, t4 / 1000);
+        fprintf(fp,"y1(%d) = %f; ",NUM, t1/100);
+        fprintf(fp,"y2(%d) = %f; ",NUM, t2/100);
+        fprintf(fp,"y3(%d) = %f; ",NUM, (t3 - R1) / 99);
+        fprintf(fp,"y4(%d) = %f;\n",NUM, t4 / 100);
         //finally release the space
         sdkDeleteTimer(&hTimer);
         checkCudaErrors(cudaFree(d_SrcVal));
