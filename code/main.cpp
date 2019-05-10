@@ -26,13 +26,18 @@ int main(int argc, char **argv)
     // remove the first gpu call
     uint R1;
     FILE *fp = NULL;
-    fp = fopen("grapro.m", "w");
+    FILE *fpp = NULL;
+    FILE *fppp = NULL;
+    fp = fopen("average.m", "w");
+    fpp = fopen("variance.m","w");
+    fppp = fopen("standard_deviation.m","w");
     fprintf(fp,"x=1:100:%d;",ROUND);
     fprintf(fp,"y1=1:100:%d;",ROUND);
     fprintf(fp,"y2=1:100:%d;",ROUND);
     fprintf(fp,"y3=1:100:%d;",ROUND);
     fprintf(fp,"y4=1:100:%d;\n",ROUND);
-
+    fprintf(fpp,"fid = fopen('variance.txt','wt');\n");
+    fprintf(fppp,"fid = fopen('standard_deviation.txt','wt');\n");
     //printf("%s Starting...\n\n", argv[0]);
 
     int dev = findCudaDevice(argc, (const char **) argv);
@@ -42,7 +47,14 @@ int main(int argc, char **argv)
     }
 
     for(uint NUM = 1; NUM <= ROUND; NUM+=100) {
-
+        fprintf(fpp,"x1 = 1:10;");
+        fprintf(fpp,"x2 = 1:10;");
+        fprintf(fpp,"x3 = 1:9;");
+        fprintf(fpp,"x4 = 1:10;");
+        fprintf(fppp,"x1 = 1:10;");
+        fprintf(fppp,"x2 = 1:10;");
+        fprintf(fppp,"x3 = 1:9;");
+        fprintf(fppp,"x4 = 1:10;");
         StopWatchInterface *hTimer = NULL;
         float t1 = 0, t2 = 0, t3 = 0, t4 = 0;
 
@@ -70,7 +82,8 @@ int main(int argc, char **argv)
 
         srand(2019);
 
-        for (uint loop = 0; loop < 100; loop++) {
+        for (uint loop = 0; loop < 10; loop++) {
+
             for (uint i = 0; i < N; i++) {
                 h_SrcKey[i] = rand() % numValues;
             }
@@ -112,6 +125,8 @@ int main(int argc, char **argv)
             sdkStopTimer(&hTimer);
             t1 += sdkGetTimerValue(&hTimer);
             //printf("Inspecting the results...\n");
+            fprintf(fpp,"x1(%d) = %f; ",loop+1, sdkGetTimerValue(&hTimer));
+            fprintf(fppp,"x1(%d) = %f; ",loop+1, sdkGetTimerValue(&hTimer));
             keysFlag = validateSortedKeys(
                     hm_DstKey,
                     hm_SrcKey,
@@ -146,7 +161,8 @@ int main(int argc, char **argv)
             std::sort(hq_SrcKey, hq_SrcKey + NUM);
             sdkStopTimer(&hTimer);
             t2 += sdkGetTimerValue(&hTimer);
-
+            fprintf(fpp,"x2(%d) = %f; ",loop+1, sdkGetTimerValue(&hTimer));
+            fprintf(fppp,"x2(%d) = %f; ",loop+1, sdkGetTimerValue(&hTimer));
 
             sdkResetTimer(&hTimer);
             sdkStartTimer(&hTimer);
@@ -179,6 +195,9 @@ int main(int argc, char **argv)
             checkCudaErrors(cudaMemcpy(h_DstVal, d_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
             sdkStopTimer(&hTimer);
             t3 += sdkGetTimerValue(&hTimer);
+            if(loop>0){
+            fprintf(fpp,"x3(%d) = %f; ",loop, sdkGetTimerValue(&hTimer));
+            fprintf(fppp,"x3(%d) = %f; ",loop, sdkGetTimerValue(&hTimer));}
             if (loop == 0) R1 = sdkGetTimerValue(&hTimer);
             //printf("Inspecting the results...\n");
             keysFlag = validateSortedKeys(
@@ -230,6 +249,8 @@ int main(int argc, char **argv)
             checkCudaErrors(cudaMemcpy(h_DstVal, db_DstVal, N * sizeof(uint), cudaMemcpyDeviceToHost));
             sdkStopTimer(&hTimer);
             t4 += sdkGetTimerValue(&hTimer);
+            fprintf(fpp,"x4(%d) = %f; ",loop+1, sdkGetTimerValue(&hTimer));
+            fprintf(fppp,"x4(%d) = %f; ",loop+1, sdkGetTimerValue(&hTimer));
             //printf("Inspecting the results...\n");
             keysFlag = validateSortedKeys(
                     h_DstKey,
@@ -250,12 +271,14 @@ int main(int argc, char **argv)
             //printf("Shutting down...\n");
             closeMergeSort();
 
+            fprintf(fpp,"fprintf(fid,'1 %f %f %f %f\\n',var(x1),var(x2),var(x3),var(x4));\n");
+            fprintf(fppp,"fprintf(fid,'1 %f %f %f %f\\n',std(x1),std(x2),std(x3),std(x4));\n");
 
         }
-        fprintf(fp,"y1(%d) = %f; ",1+NUM/100, t1/100);
-        fprintf(fp,"y2(%d) = %f; ",1+NUM/100, t2/100);
-        fprintf(fp,"y3(%d) = %f; ",1+NUM/100, (t3 - R1) / 99);
-        fprintf(fp,"y4(%d) = %f;\n",1+NUM/100, t4 / 100);
+        fprintf(fp,"y1(%d) = %f; ",1+NUM/100, t1/10);
+        fprintf(fp,"y2(%d) = %f; ",1+NUM/100, t2/10);
+        fprintf(fp,"y3(%d) = %f; ",1+NUM/100, (t3 - R1) / 9);
+        fprintf(fp,"y4(%d) = %f;\n",1+NUM/100, t4 / 10);
 
         //finally release the space
         sdkDeleteTimer(&hTimer);
