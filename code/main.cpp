@@ -252,10 +252,10 @@ int main(int argc, char **argv)
 
 
         }
-        fprintf(fp,"y1(%d) = %f; ",NUM, t1/100);
-        fprintf(fp,"y2(%d) = %f; ",NUM, t2/100);
-        fprintf(fp,"y3(%d) = %f; ",NUM, (t3 - R1) / 99);
-        fprintf(fp,"y4(%d) = %f;\n",NUM, t4 / 100);
+        fprintf(fp,"y1(%d) = %f; ",1+NUM/100, t1/100);
+        fprintf(fp,"y2(%d) = %f; ",1+NUM/100, t2/100);
+        fprintf(fp,"y3(%d) = %f; ",1+NUM/100, (t3 - R1) / 99);
+        fprintf(fp,"y4(%d) = %f;\n",1+NUM/100, t4 / 100);
 
         //finally release the space
         sdkDeleteTimer(&hTimer);
