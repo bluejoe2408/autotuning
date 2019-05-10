@@ -235,7 +235,7 @@ run: build
 	$(EXEC) ./mergeSort
 
 clean:
-	rm -f mergeSort bitonic.o main.o mergeSort.o mergeSort_host.o mergeSort_validate.o grapro.m
+	rm -f mergeSort bitonic.o main.o mergeSort.o mergeSort_host.o mergeSort_validate.o
 	rm -rf ../bin/$(TARGET_ARCH)/$(TARGET_OS)/$(BUILD_TYPE)/mergeSort
 
 clobber: clean

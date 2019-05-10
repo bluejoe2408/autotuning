@@ -1,4 +1,4 @@
-#define ROUND 1000
+#define ROUND 100001
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,8 +35,8 @@ int main(int argc, char **argv)
     if (dev == -1) {
         return EXIT_FAILURE;
     }
-    
-    for(uint NUM = 1; NUM <= ROUND; NUM++) {
+
+    for(uint NUM = 1; NUM <= ROUND; NUM+=100) {
 
         StopWatchInterface *hTimer = NULL;
         float t1 = 0, t2 = 0, t3 = 0, t4 = 0;
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 
         srand(2019);
 
-        for (uint loop = 0; loop < 1000; loop++) {
+        for (uint loop = 0; loop < 100; loop++) {
             for (uint i = 0; i < N; i++) {
                 h_SrcKey[i] = rand() % numValues;
             }
