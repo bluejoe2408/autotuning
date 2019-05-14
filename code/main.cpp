@@ -28,9 +28,11 @@ int main(int argc, char **argv)
     FILE *fp = NULL;
     FILE *fpp = NULL;
     FILE *fppp = NULL;
+    FILE *ffp = NULL;
     fp = fopen("average.m", "w");
     fpp = fopen("variance.m","w");
     fppp = fopen("standard_deviation.m","w");
+    ffp = fopen("average.csv", "w");
     fprintf(fp,"x=1:100:%d;",ROUND);
     fprintf(fp,"y1=1:100:%d;",ROUND);
     fprintf(fp,"y2=1:100:%d;",ROUND);
@@ -38,6 +40,7 @@ int main(int argc, char **argv)
     fprintf(fp,"y4=1:100:%d;\n",ROUND);
     fprintf(fpp,"fid = fopen('variance.txt','wt');\n");
     fprintf(fppp,"fid = fopen('standard_deviation.txt','wt');\n");
+    fprintf(ffp,"amount,merge(cpu),quick,merge(gpu),bitonic(gpu)\n");
     //printf("%s Starting...\n\n", argv[0]);
 
     int dev = findCudaDevice(argc, (const char **) argv);
@@ -274,6 +277,11 @@ int main(int argc, char **argv)
 
 
         }
+        fprintf(ffp," %d, ", NUM);
+        fprintf(ffp," %f, ", t1/10);
+        fprintf(ffp," %f, ", t2/10);
+        fprintf(ffp," %f, ", (t3 - R1) / 9);
+        fprintf(ffp," %f\n",t4 / 10);
         fprintf(fp,"y1(%d) = %f; ",1+NUM/100, t1/10);
         fprintf(fp,"y2(%d) = %f; ",1+NUM/100, t2/10);
         fprintf(fp,"y3(%d) = %f; ",1+NUM/100, (t3 - R1) / 9);
