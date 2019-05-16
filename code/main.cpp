@@ -25,6 +25,11 @@ int main(int argc, char **argv)
     uint keysFlag, valuesFlag;
     // remove the first gpu call
     uint R1;
+
+
+
+
+    //for raw data
     FILE *fp = NULL;
     FILE *fpp = NULL;
     FILE *fppp = NULL;
@@ -41,15 +46,21 @@ int main(int argc, char **argv)
     fprintf(fpp,"fid = fopen('variance.txt','wt');\n");
     fprintf(fppp,"fid = fopen('standard_deviation.txt','wt');\n");
     fprintf(ffp,"amount,merge(cpu),quick,merge(gpu),bitonic(gpu)\n");
-    //printf("%s Starting...\n\n", argv[0]);
 
+
+
+
+    //test if there is any dev
     int dev = findCudaDevice(argc, (const char **) argv);
 
     if (dev == -1) {
         return EXIT_FAILURE;
     }
 
+
     for(uint NUM = 1; NUM <= ROUND; NUM+=100) {
+
+        //for raw data
         fprintf(fpp,"x1 = 1:10;");
         fprintf(fpp,"x2 = 1:10;");
         fprintf(fpp,"x3 = 1:9;");
@@ -58,6 +69,8 @@ int main(int argc, char **argv)
         fprintf(fppp,"x2 = 1:10;");
         fprintf(fppp,"x3 = 1:9;");
         fprintf(fppp,"x4 = 1:10;\n");
+
+
         StopWatchInterface *hTimer = NULL;
         float t1 = 0, t2 = 0, t3 = 0, t4 = 0;
 
