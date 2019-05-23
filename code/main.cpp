@@ -58,7 +58,7 @@ int main(int argc, char **argv)
     }
 
 
-    for(uint NUM = 1; NUM <= ROUND; NUM+=100) {
+    for(uint NUM = 1; NUM <= ROUND; NUM*=2) {
 
         //for raw data
         fprintf(fpp,"x1 = 1:10;");
